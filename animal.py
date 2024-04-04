@@ -66,16 +66,9 @@ class ZooStaff:
     def __str__(self):
         return f"{self.profession} {self.name}"
 
-    def action(self):
-        print({self }, end='')
-
 class ZooDirector(ZooStaff):
     def control_zoo(self):
         print(f"{self} руководит зоопарком")
-
-    # def action(self):
-    #     super().action()
-    #     self.control_zoo()
 
 class ZooKeeper(ZooStaff):
     def feed_animal(self, animal):
@@ -111,7 +104,7 @@ class Zoo:
             print(employee)
         print()
 
-# Функция для демонстрации полиморфизма
+# Функции для демонстрации полиморфизма
 def animal_info(animals_list):
     for animal in animals_list:
         animal.get_info()
@@ -122,29 +115,26 @@ def animal_sound(animals_list):
         animal.make_sound()
     print()
 
-# def staff_action(staff_list):
-#     for item in staff_list:
-#         item.make_sound()
-#     print()
 
 # ---------------------------------------- Тест --------------------------------------------------
+
 # Создаём объекты животных
 bird = Bird("Павлин", 3, 150)
 mammal = Mammal("Пантера", 5, 80)
 reptile = Reptile("Питон", 2, 30)
 
-# Создаем список животных и демонстрируем полиморфизм
+# Создаём список животных и демонстрируем полиморфизм
 animals = [bird, mammal, reptile]
 animal_info(animals)
 animal_sound(animals)
 
-# Создание экземпляров классов
+# Создаём объекты классов
 zoo = Zoo()
 director = ZooDirector("Директор", "Иван Иванович")
 keeper = ZooKeeper("Смотритель", "Сергей Сергеевич")
 vet = ZooVet("Ветеринар", "Борис Борисович")
 
-# Добавление сотрудников и животных в зоопарк
+# Добавляем сотрудников и животных в зоопарк
 zoo.add_employee(director)
 zoo.add_employee(keeper)
 zoo.add_employee(vet)
@@ -155,7 +145,7 @@ zoo.add_animal(mammal)
 zoo.add_animal(reptile)
 print()
 
-# Показать состав зоопарка
+# Выводим состав зоопарка
 zoo.show_employees()
 zoo.show_animals()
 
