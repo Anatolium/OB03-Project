@@ -1,58 +1,61 @@
+LOG_FILE = "zoo_data.txt"
+
 # Базовый класс Animal
 class Animal:
-    def __init__(self, species, name, age):
+    def __init__(self, bio_class, species, name, age):
+        self.bio_class = bio_class
         self.species = species
         self.name = name
         self.age = age
         self.unit = ""
 
     def __str__(self):
-        return f"{self.species} {self.name}"
+        return f"{self.bio_class} {self.species} по имени {self.name}, возраст {self.age} лет"
 
     def make_sound(self):
         print("** Голос этого животного звучит так:")
 
     def eat(self):
-        print(f"{self} ест")
+        print(f"{self}, ест")
 
 class Bird(Animal):
-    def __init__(self, name, age, wing_span):
-        super().__init__("Птица", name, age)
+    def __init__(self, species, name, age, wing_span):
+        super().__init__("Птица", species, name, age)
         self.wing_span = wing_span
         self.unit = "см"
 
     def get_info(self):
-        print(f"{self} имеет размах крыльев {self.wing_span} {self.unit}")
+        print(f"{self}, имеет размах крыльев {self.wing_span} {self.unit}")
 
     def make_sound(self):
         super().make_sound()
-        print(f"{self} чирикает")
+        print(f"{self}, чирикает")
 
 class Mammal(Animal):
-    def __init__(self, name, age, running_speed):
-        super().__init__("Млекопитающее", name, age)
+    def __init__(self, species, name, age, running_speed):
+        super().__init__("Млекопитающее", species, name, age)
         self.running_speed = running_speed
         self.unit = "км/ч"
 
     def get_info(self):
-        print(f"{self} бегает со скоростью {self.running_speed} {self.unit}")
+        print(f"{self}, бегает со скоростью {self.running_speed} {self.unit}")
 
     def make_sound(self):
         super().make_sound()
-        print(f"{self} издаёт один из характерных звуков млекопитающего")
+        print(f"{self}, издаёт один из характерных звуков млекопитающего")
 
 class Reptile(Animal):
-    def __init__(self, name, age, body_temperature):
-        super().__init__("Рептилия", name, age)
+    def __init__(self, species, name, age, body_temperature):
+        super().__init__("Рептилия", species, name, age)
         self.body_temperature = body_temperature
         self.unit = "°"
 
     def get_info(self):
-        print(f"{self} имеет температуру тела {self.body_temperature}{self.unit}")
+        print(f"{self}, имеет температуру тела {self.body_temperature}{self.unit}")
 
     def make_sound(self):
         super().make_sound()
-        print(f"{self} шипит")
+        print(f"{self}, шипит")
 
 # Класс данных всего зоопарка
 class Zoo:
@@ -66,7 +69,7 @@ class Zoo:
 
     def add_animal(self, animal):
         self.animals.append(animal)
-        print(f"{animal} добавлен в число питомцев зоопарка")
+        print(f"{animal}, добавлен в число питомцев зоопарка")
 
     def show_workers(self):
         print("Сотрудники зоопарка:")
@@ -99,8 +102,7 @@ class ZooKeeper(ZooStaff):
 
 class ZooVet(ZooStaff):
     def heal_animal(self, animal):
-        print(f"{self} лечит питомца {animal.species} {animal.name}")
-
+        print(f"{self} лечит питомца {animal}")
 
 # Функции для демонстрации полиморфизма
 def animal_info(animals_list):
@@ -121,9 +123,9 @@ def animal_eat(animals_list):
 # ---------------------------------------- Тест --------------------------------------------------
 
 # Создаём объекты животных
-bird = Bird("Павлин", 3, 150)
-mammal = Mammal("Пантера", 5, 80)
-reptile = Reptile("Питон", 2, 30)
+bird = Bird("Павлин", "Красавчик", 5, 150)
+mammal = Mammal("Пантера", "Багира", 6, 80)
+reptile = Reptile("Питон", "Каа", 7, 30)
 
 # Создаём список животных и демонстрируем полиморфизм
 animals = [bird, mammal, reptile]
