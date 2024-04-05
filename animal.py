@@ -13,10 +13,7 @@ class Animal:
         print("** Голос этого животного звучит так:")
 
     def eat(self):
-        print(f"{self.species} {self.name} ест")
-
-    def sleep(self):
-        print(f"{self.species} {self.name} спит")
+        print(f"{self} ест")
 
 class Bird(Animal):
     def __init__(self, name, age, wing_span):
@@ -57,6 +54,32 @@ class Reptile(Animal):
         super().make_sound()
         print(f"{self} шипит")
 
+# Класс данных всего зоопарка
+class Zoo:
+    def __init__(self):
+        self.animals = []
+        self.workers = []
+
+    def add_worker(self, worker):
+        self.workers.append(worker)
+        print(f"{worker} добавлен в число сотрудников зоопарка")
+
+    def add_animal(self, animal):
+        self.animals.append(animal)
+        print(f"{animal} добавлен в число питомцев зоопарка")
+
+    def show_workers(self):
+        print("Сотрудники зоопарка:")
+        for worker in self.workers:
+            print(worker)
+        print()
+
+    def show_animals(self):
+        print("Питомцы зоопарка:")
+        for animal in self.animals:
+            print(animal)
+        print()
+
 # Базовый класс сотрудников зоопарка
 class ZooStaff:
     def __init__(self, profession,  name):
@@ -78,31 +101,6 @@ class ZooVet(ZooStaff):
     def heal_animal(self, animal):
         print(f"{self} лечит питомца {animal.species} {animal.name}")
 
-# Класс данных всего зоопарка
-class Zoo:
-    def __init__(self):
-        self.animals = []
-        self.employees = []
-
-    def add_animal(self, animal):
-        self.animals.append(animal)
-        print(f"{animal} добавлен в число питомцев зоопарка")
-
-    def add_employee(self, employee):
-        self.employees.append(employee)
-        print(f"{employee} добавлен в число сотрудников зоопарка")
-
-    def show_animals(self):
-        print("Питомцы зоопарка:")
-        for animal in self.animals:
-            print(animal)
-        print()
-
-    def show_employees(self):
-        print("Сотрудники зоопарка:")
-        for employee in self.employees:
-            print(employee)
-        print()
 
 # Функции для демонстрации полиморфизма
 def animal_info(animals_list):
@@ -115,6 +113,10 @@ def animal_sound(animals_list):
         animal.make_sound()
     print()
 
+def animal_eat(animals_list):
+    for animal in animals_list:
+        animal.eat()
+    print()
 
 # ---------------------------------------- Тест --------------------------------------------------
 
@@ -127,26 +129,28 @@ reptile = Reptile("Питон", 2, 30)
 animals = [bird, mammal, reptile]
 animal_info(animals)
 animal_sound(animals)
+animal_eat(animals)
 
-# Создаём объекты классов
+# Создаём объекты классов зоопарка и персонала
 zoo = Zoo()
 director = ZooDirector("Директор", "Иван Иванович")
 keeper = ZooKeeper("Смотритель", "Сергей Сергеевич")
 vet = ZooVet("Ветеринар", "Борис Борисович")
 
-# Добавляем сотрудников и животных в зоопарк
-zoo.add_employee(director)
-zoo.add_employee(keeper)
-zoo.add_employee(vet)
+# Добавляем сотрудников
+zoo.add_worker(director)
+zoo.add_worker(keeper)
+zoo.add_worker(vet)
 print()
 
+# Добавляем животных
 zoo.add_animal(bird)
 zoo.add_animal(mammal)
 zoo.add_animal(reptile)
 print()
 
 # Выводим состав зоопарка
-zoo.show_employees()
+zoo.show_workers()
 zoo.show_animals()
 
 # Специализированные действия сотрудников
